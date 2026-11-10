@@ -48,7 +48,7 @@ Le stockage vectoriel est temporaire. Le workflow de chargement permet de remett
 
 ### Vue du workflow n8n
 
-![Workflow 05 — Assistant documentaire gouverné](assets/workflow-05-vue-ensemble.png)
+![Vue d’ensemble du workflow 05](assets/workflow-05-vue-ensemble.png)
 
 Du formulaire à la restitution : contrôle de refus, recherche documentaire, réponse ou abstention et traçabilité PostgreSQL.
 
