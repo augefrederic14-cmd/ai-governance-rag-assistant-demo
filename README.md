@@ -1,6 +1,3 @@
-# ai-governance-rag-assistant-demo
-Démonstrateur n8n : réponse documentaire sourcée, abstention, règle de refus et traçabilité PostgreSQL.
-
 # AI Governance RAG Assistant
 
 **Un démonstrateur d’assistant documentaire qui combine réponse sourcée, abstention, règle de refus et traçabilité.**
