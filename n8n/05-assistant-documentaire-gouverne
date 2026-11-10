@@ -1,1 +1,690 @@
-
+{
+  "name": "05 - Assistant documentaire gouverné",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        208
+      ],
+      "id": "08f9e2b1-3abd-442e-8395-7e454e0e5691",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "94c947b9-6fbd-46b3-9f37-3db716d8f8ab",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1648,
+        208
+      ],
+      "id": "0a85fb9e-73ac-4755-92bf-828c91514736",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0e38f438-b299-4549-a75c-e3c009025457",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "2f293dd6-683f-464d-8c7e-e4734404deab",
+              "name": "behavior",
+              "value": "={{ $json.behavior }}",
+              "type": "string"
+            },
+            {
+              "id": "10175ec3-ebc1-4db6-a0aa-3842fb0bdfb7",
+              "name": "response",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            },
+            {
+              "id": "e91d41d1-ed11-468c-9e89-59ca70ce5c90",
+              "name": "status",
+              "value": "completed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2480,
+        32
+      ],
+      "id": "c6d4ba30-eb21-42d0-818e-cacf79cf329d",
+      "name": "Demande autorisée"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.behavior }}",
+                    "rightValue": "answer",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "24cb8543-bf13-4646-8192-dd423890da22"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "fee8e40a-71ea-4da6-8b65-5f1ffe591f23",
+                    "leftValue": "={{ $json.behavior }}",
+                    "rightValue": "abstain",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "45167968-49e2-4cc6-be7d-f78ca70c1661",
+                    "leftValue": "={{ $json.behavior }}",
+                    "rightValue": "refuse",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        2256,
+        176
+      ],
+      "id": "b99cface-47dc-4b0d-a58f-72186f6868e7",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2d780512-512e-4e57-9a9f-9155c9b91b50",
+              "name": "=question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "210cc84b-69a0-4e64-bac3-f4febf3f88c4",
+              "name": "=behavior",
+              "value": "refuse",
+              "type": "string"
+            },
+            {
+              "id": "822f5eb8-5dbd-48f9-953c-8e85777a3349",
+              "name": "response",
+              "value": "Je ne peux pas fournir cette information. Cette demande concerne une information sensible. Veuillez vous rapprocher du service IT.",
+              "type": "string"
+            },
+            {
+              "id": "63da3e94-a0c9-4a44-9b42-7e77f2b0dee2",
+              "name": "status",
+              "value": "completed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2480,
+        352
+      ],
+      "id": "57c2b9b6-e25b-4e02-b2a0-17fbed6b54c7",
+      "name": "Refus de sécurité"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f5421409-a287-4931-b2d7-1ab71ed7fdbd",
+              "name": "=question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "732ee1e8-e373-4f92-a837-094cec9f6e0b",
+              "name": "=behavior",
+              "value": "={{ $json.behavior}}",
+              "type": "string"
+            },
+            {
+              "id": "822f5eb8-5dbd-48f9-953c-8e85777a3349",
+              "name": "response",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            },
+            {
+              "id": "8c4b9d53-314e-4926-a0f3-0017ba5c73fd",
+              "name": "=status",
+              "value": "=completed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2480,
+        192
+      ],
+      "id": "6b8b4964-5c24-4ead-9bca-cd21bca126a3",
+      "name": "Abstention"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "requests",
+          "mode": "list",
+          "cachedResultName": "requests"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "question": "={{ $json.question }}",
+            "behavior": "={{ $json.behavior }}",
+            "response": "={{ $json.response }}",
+            "status": "={{ $json.status }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "question",
+              "displayName": "question",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "behavior",
+              "displayName": "behavior",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "response",
+              "displayName": "response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.8,
+      "position": [
+        2752,
+        192
+      ],
+      "id": "99b6aeff-49ee-4c13-8ce8-4ca36f2a608a",
+      "name": "Insert rows in a table"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bb18142c-0a21-46e7-93e7-3e71be1b3129",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "00dbc7d0-09d7-45ed-8933-5857f9fabc2f",
+              "name": "behavior",
+              "value": "={{ $json.behavior }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab4f838-6ba0-4ca0-a5a9-8c39f9971cbc",
+              "name": "response",
+              "value": "=Traitement interrompu : la valeur de behavior est non reconnue. Valeurs attendues : answer, abstain ou refuse.",
+              "type": "string"
+            },
+            {
+              "id": "2a73923c-f8f3-4246-94cc-39429800d3cb",
+              "name": "status",
+              "value": "invalid_behavior",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2480,
+        512
+      ],
+      "id": "ec6c43d0-adbe-4d40-98fe-1cff55ea61ec",
+      "name": "Comportement non reconnu"
+    },
+    {
+      "parameters": {
+        "formTitle": "AI Governance - Formulaire de test",
+        "formDescription": "Démonstrateur sur données synthétiques. Posez une question sur la politique de gestion des mots de passe. L’assistant fournira une réponse sourcée, une abstention ou un refus selon le traitement effectué.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "question",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        1472,
+        208
+      ],
+      "id": "59f867a7-0bfe-4e40-a2cb-fe83305fd71a",
+      "name": "On form submission"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Résultat du traitement",
+        "completionMessage": "={{ $json.response }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        2976,
+        192
+      ],
+      "id": "8ccd1c18-79d0-4b9e-ab6e-1f7e12525098",
+      "name": "Form"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "99d6c68c-ebd9-493d-8d78-c53034469055",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        1984,
+        128
+      ],
+      "id": "3231acd7-397d-41f6-a350-7461dea83d84",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "448b3d69-421b-49e7-82bd-107695da43dc",
+              "leftValue": "={{ $json.question }}",
+              "rightValue": "mot de passe administrateur",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        1808,
+        208
+      ],
+      "id": "b50b9b47-177c-4f56-9375-b1ea70b823ef",
+      "name": "Contôrle de refus"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "question": "={{ $json.question }}"
+          },
+          "matchingColumns": [
+            "question"
+          ],
+          "schema": [
+            {
+              "id": "question",
+              "displayName": "question",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1968,
+        416
+      ],
+      "id": "936bf28e-4622-46db-90bb-d6ddf610b2ee",
+      "name": "Call 'Sous-workflow — Recherche et réponse sourcée'"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Contôrle de refus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Demande autorisée",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Abstention",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Comportement non reconnu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Demande autorisée": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Abstention": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refus de sécurité": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comportement non reconnu": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        []
+      ]
+    },
+    "Contôrle de refus": {
+      "main": [
+        [
+          {
+            "node": "Refus de sécurité",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'Sous-workflow — Recherche et réponse sourcée'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Sous-workflow — Recherche et réponse sourcée'": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
