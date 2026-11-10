@@ -1,0 +1,428 @@
+{
+  "name": "Test - Recherche sémantique",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        0
+      ],
+      "id": "8684f0f5-3a0a-45d0-8064-64355ea8cc5c",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        16,
+        16
+      ],
+      "id": "56db7bf4-9c5a-4982-b391-34d5bdada29b",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36470fb1-0bd9-4a70-b3ee-7885d4075fc3",
+              "name": "document_title",
+              "value": "Politique de gestion des mots de passe et des accès",
+              "type": "string"
+            },
+            {
+              "id": "a68a6882-bb5f-402e-b973-ec43b102fe73",
+              "name": "document_reference",
+              "value": "ACCES-2026-03 — version 1.8",
+              "type": "string"
+            },
+            {
+              "id": "102c0524-8ed8-45dd-a5ab-731de02caa2d",
+              "name": "section",
+              "value": "1. Règles relatives aux mots de passe",
+              "type": "string"
+            },
+            {
+              "id": "3f5428f5-b7f7-4f78-9404-3adb1b14b9a3",
+              "name": "passage",
+              "value": "Tout mot de passe doit comporter au minimum 14 caractères et combiner majuscules, minuscules, chiffres et caractères spéciaux. L’utilisation d’une phrase de passe est recommandée.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -192,
+        -112
+      ],
+      "id": "0fb9f66c-f598-4333-8b46-8bca292617e7",
+      "name": "Longueur minimale"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aef9e848-0e37-4e4f-b17d-15a48159b09f",
+              "name": "question",
+              "value": "\tÀ quelle fréquence faut-il renouveler le mot de passe d’un compte standard ?",
+              "type": "string"
+            },
+            {
+              "id": "2e27cb68-8a7e-4e97-aa30-13f9712d8b84",
+              "name": "mot_cle",
+              "value": "renouveler",
+              "type": "string"
+            },
+            {
+              "id": "756291be-630d-407e-bf92-84e2144c8a3a",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        240,
+        16
+      ],
+      "id": "0a91509d-c06d-428f-9f06-37375e08dda0",
+      "name": "Question de test"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "8a5bc995-ae86-4557-99bd-9aca470c9d35",
+              "leftValue": "={{ $json.passage }}",
+              "rightValue": "={{ $json.mot_cle }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.4,
+      "position": [
+        432,
+        16
+      ],
+      "id": "ecec571e-c9ae-47ca-acfd-bc1e70eaaa6e",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36470fb1-0bd9-4a70-b3ee-7885d4075fc3",
+              "name": "document_title",
+              "value": "Politique de gestion des mots de passe et des accès",
+              "type": "string"
+            },
+            {
+              "id": "a68a6882-bb5f-402e-b973-ec43b102fe73",
+              "name": "document_reference",
+              "value": "ACCES-2026-03 — version 1.8",
+              "type": "string"
+            },
+            {
+              "id": "102c0524-8ed8-45dd-a5ab-731de02caa2d",
+              "name": "section",
+              "value": "1. Règles relatives aux mots de passe",
+              "type": "string"
+            },
+            {
+              "id": "3f5428f5-b7f7-4f78-9404-3adb1b14b9a3",
+              "name": "passage",
+              "value": "Les mots de passe des comptes standards n'ont plus d'expiration obligatoire périodique, conformément aux recommandations en vigueur, sauf en cas de suspicion de compromission, où le changement est immédiat.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -192,
+        96
+      ],
+      "id": "e3f30f1c-09ba-4d34-b11b-7e04bd5c2835",
+      "name": "Execution"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3a1a0299-3342-4ba2-9bc8-d24f0457f4ab",
+              "name": "question",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "de527788-1102-428e-ac57-70369a564f66",
+              "name": "response",
+              "value": "={{ $json.passage }}",
+              "type": "string"
+            },
+            {
+              "id": "230455cd-9456-4dd8-8578-4e255998f6d6",
+              "name": "document_title",
+              "value": "={{ $json.document_title }}",
+              "type": "string"
+            },
+            {
+              "id": "acb1c484-f1ed-4b09-aca2-00ba0a7ba8e1",
+              "name": "document_reference",
+              "value": "={{ $json.document_reference }}",
+              "type": "string"
+            },
+            {
+              "id": "02ccf87c-77e7-4d20-b333-baa682028622",
+              "name": "section",
+              "value": "section",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        624,
+        16
+      ],
+      "id": "ee92833e-fd72-41ba-a821-0042d9fae0db",
+      "name": "Préparer la réponse sourcée"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "test-politique-mots-de-passe",
+          "mode": "list"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        176
+      ],
+      "id": "bc9597d2-be04-4f7a-b1bf-f414385dc642",
+      "name": "Simple Vector Store"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.passage }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "document_title",
+                "value": "={{ $json.document_title }}"
+              },
+              {
+                "name": "document_reference",
+                "value": "={{ $json.document_reference }}"
+              },
+              {
+                "name": "section",
+                "value": "={{ $json.section }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        528,
+        384
+      ],
+      "id": "4230280e-e055-4281-90dd-88d790c5ad45",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        384
+      ],
+      "id": "a18a0cc8-a103-4e81-acad-4b018f470aba",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        128,
+        160
+      ],
+      "id": "5d10008f-e086-461c-9826-f98fbcfadfde",
+      "name": "Loop Over Items"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Longueur minimale",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Longueur minimale": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Question de test": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execution": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Préparer la réponse sourcée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
