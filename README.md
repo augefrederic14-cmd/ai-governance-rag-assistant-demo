@@ -56,6 +56,32 @@ Du formulaire à la restitution : contrôle de refus, recherche documentaire, r�
 
 ![Architecture simplifiée de l’assistant documentaire](assets/architecture-simplifiee-assistant-documentaire-v2.png)
 
+## Démonstration en images
+
+### Réponse sourcée
+
+Pour la question sur la longueur minimale d’un mot de passe, l’assistant répond à partir du passage documentaire et cite sa source.
+
+![Réponse sourcée affichée dans le formulaire](assets/demo-reponse-sourcee.png)
+
+### Abstention
+
+Pour la question sur une politique de sécurité sur Mars, les informations disponibles ne permettent pas de répondre : l’assistant s’abstient.
+
+![Abstention affichée dans le formulaire](assets/demo-abstention.png)
+
+### Refus
+
+Pour cette question, la règle de refus détecte l’expression « mot de passe administrateur » et renvoie un message prédéfini, sans appeler le sous-workflow de recherche documentaire.
+
+![Refus affiché dans le formulaire](assets/demo-refus.png)
+
+### Traçabilité dans Supabase
+
+Les trois scénarios testés sont enregistrés avec leur question, leur comportement et leur statut. Le statut `completed` indique que le traitement est terminé ; il ne garantit pas la justesse de la réponse.
+
+![Traces des trois comportements dans Supabase](assets/demo-traces-supabase.png)
+
 ## Ma contribution
 
 - Cadrage du cas d’usage et définition des comportements `answer`, `abstain` et `refuse`.
