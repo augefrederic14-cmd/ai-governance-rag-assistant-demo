@@ -52,6 +52,10 @@ Le stockage vectoriel est temporaire. Le workflow de chargement permet de remett
 
 Du formulaire à la restitution : contrôle de refus, recherche documentaire, réponse ou abstention et traçabilité PostgreSQL.
 
+### Architecture simplifiée de l'assistant documentaire
+
+![Architecture simplifiée de l’assistant documentaire](assets/architecture-simplifiee-assistant-documentaire-v2.png)
+
 ## Ma contribution
 
 - Cadrage du cas d’usage et définition des comportements `answer`, `abstain` et `refuse`.
